@@ -21,4 +21,11 @@ mongoose
     console.error(error);
   });
 
-generateController();
+app.get("/", (req, res) => {
+  res.send("Server is currently running");
+});
+
+app.get("/api/generate", (req, res) => {
+  generateController();
+  res.status(200).send("Generated usersArray");
+});
