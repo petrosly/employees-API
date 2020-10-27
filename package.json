@@ -1,0 +1,27 @@
+{
+  "name": "employees-app",
+  "version": "1.0.0",
+  "description": "This is an app that consumes my own API that uses CRUD actions to manipulate employee data for a fake company.",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.11",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petrosly/employees-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petrosly/employees-app/issues"
+  },
+  "homepage": "https://github.com/petrosly/employees-app#readme"
+}
