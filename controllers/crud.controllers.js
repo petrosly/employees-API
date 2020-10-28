@@ -7,7 +7,7 @@ const findUsers = async (req, res) => {
     const docs = await User.find({}).lean().exec();
     res.status(200).json({ data: docs });
   } catch (e) {
-    console.error(e);
+    res.status(400).send("An error occured while finding the users: " + e);
   }
 };
 
@@ -23,10 +23,13 @@ const findUserById = async (req, res) => {
     const doc = await User.findById(req.params.id).lean().exec();
     if (doc == null) {
       res.status(400).send("No user with the provided id ");
+      return;
     }
     res.status(200).json({ data: doc });
   } catch (e) {
-    console.error(e);
+    res
+      .status(400)
+      .send("An error occured while finding the user you want: " + e);
   }
 };
 
@@ -85,6 +88,7 @@ const deleteDepartment = async (req, res) => {
         "An error occured when trying to find users with the given department: " +
           e
       );
+    return;
   }
 
   if (employeesOfDepartment.length == 0) {
@@ -101,6 +105,7 @@ const deleteDepartment = async (req, res) => {
       res
         .status(400)
         .send("An error occured while deleting the department you want: " + e);
+      return;
     }
   });
 
