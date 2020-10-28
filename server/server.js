@@ -13,7 +13,7 @@ const {
   createUser,
   deleteUser,
   deleteDepartment,
-  updateUser,
+  updateUserById,
 } = require("../controllers/crud.controllers");
 
 //Middleware
@@ -65,7 +65,7 @@ app.delete("/api/department/:department", (req, res) => {
 });
 
 app.put("/api/employees/:id", (req, res) => {
-  updateUser(req, res);
+  updateUserById(req, res);
 });
 
 app.all("/*", (req, res) => {
