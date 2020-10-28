@@ -7,7 +7,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const database = "mongodb://localhost:27017/test";
 const generateController = require("../controllers/generate.controller");
-const { findUsers, findUserById } = require("../controllers/crud.controllers");
+const {
+  findUsers,
+  findUserById,
+  createUser,
+} = require("../controllers/crud.controllers");
 
 //Middleware
 
@@ -43,4 +47,8 @@ app.get("/api/employees", (req, res) => {
 
 app.get("/api/employees/:id", (req, res) => {
   findUserById(req, res);
+});
+
+app.post("/api/employees", (req, res) => {
+  createUser(req, res);
 });

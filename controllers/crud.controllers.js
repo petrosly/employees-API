@@ -9,6 +9,7 @@ const findUsers = async (req, res) => {
     console.error(e);
   }
 };
+
 const findUserById = async (req, res) => {
   try {
     if (
@@ -28,4 +29,32 @@ const findUserById = async (req, res) => {
   }
 };
 
-module.exports = { findUsers, findUserById };
+const createUser = async (req, res) => {
+  if (
+    !req.body.firstName ||
+    !req.body.lastName ||
+    !req.body.email ||
+    !req.body.department ||
+    !req.body.yearsWorking
+  ) {
+    res
+      .status(400)
+      .send(
+        "The data you provided are not valid, please include: firstName, lastName, email, department, yearsWorking"
+      );
+    return;
+  }
+
+  try {
+    await User.create(req.body);
+    res.status(201).send("Create user successfully");
+  } catch (e) {
+    res
+      .status(400)
+      .send(
+        "An error occured when creating user with the data you provided: " + e
+      );
+  }
+};
+
+module.exports = { findUsers, findUserById, createUser };
