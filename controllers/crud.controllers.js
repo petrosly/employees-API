@@ -109,10 +109,18 @@ const deleteDepartment = async (req, res) => {
     .send(`Deleted ${req.params.department} department successfully`);
 };
 
+const updateUser = async (req, res) => {
+  if (!mongoose.isValidObjectId(req.params.id) || req.params.id.length != 24) {
+    res.status(400).send("The id you provided is not in valid format.");
+    return;
+  }
+};
+
 module.exports = {
   findUsers,
   findUserById,
   createUser,
   deleteUser,
   deleteDepartment,
+  updateUser,
 };

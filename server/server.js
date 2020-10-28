@@ -13,6 +13,7 @@ const {
   createUser,
   deleteUser,
   deleteDepartment,
+  updateUser,
 } = require("../controllers/crud.controllers");
 
 //Middleware
@@ -61,4 +62,12 @@ app.delete("/api/employees/:id", (req, res) => {
 
 app.delete("/api/department/:department", (req, res) => {
   deleteDepartment(req, res);
+});
+
+app.put("/api/employees/:id", (req, res) => {
+  updateUser(req, res);
+});
+
+app.all("/*", (req, res) => {
+  res.status(404).send("The url you are trying to access is not valid");
 });
