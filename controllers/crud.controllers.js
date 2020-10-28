@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { findOneAndDelete, findByIdAndDelete } = require("../models/user.model");
 const User = require("../models/user.model");
 
 const findUsers = async (req, res) => {
@@ -13,7 +14,7 @@ const findUsers = async (req, res) => {
 const findUserById = async (req, res) => {
   try {
     if (
-      !mongoose.Types.ObjectId.isValid(req.params.id) ||
+      !mongoose.isValidObjectId(req.params.id) ||
       req.params.id.length != 24
     ) {
       res.status(400).send("The id you provided is not in valid format.");
@@ -57,4 +58,18 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { findUsers, findUserById, createUser };
+const deleteUser = async (req, res) => {
+  if (!mongoose.isValidObjectId(req.params.id) || req.params.id.length != 24) {
+    res.status(400).send("The id you provided is not in valid format.");
+    return;
+  }
+
+  try {
+    await User.findByIdAndDelete(req.params.id).exec();
+    res.status(200).send(`User with id ${req.params.id} is now deleted`);
+  } catch (e) {
+    res.status(400).send("An error occured while deleting the user: " + e);
+  }
+};
+
+module.exports = { findUsers, findUserById, createUser, deleteUser };

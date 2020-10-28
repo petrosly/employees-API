@@ -11,6 +11,7 @@ const {
   findUsers,
   findUserById,
   createUser,
+  deleteUser,
 } = require("../controllers/crud.controllers");
 
 //Middleware
@@ -51,4 +52,8 @@ app.get("/api/employees/:id", (req, res) => {
 
 app.post("/api/employees", (req, res) => {
   createUser(req, res);
+});
+
+app.delete("/api/employees/:id", (req, res) => {
+  deleteUser(req, res);
 });
