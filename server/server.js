@@ -12,6 +12,7 @@ const {
   findUserById,
   createUser,
   deleteUser,
+  deleteDepartment,
 } = require("../controllers/crud.controllers");
 
 //Middleware
@@ -56,4 +57,8 @@ app.post("/api/employees", (req, res) => {
 
 app.delete("/api/employees/:id", (req, res) => {
   deleteUser(req, res);
+});
+
+app.delete("/api/department/:department", (req, res) => {
+  deleteDepartment(req, res);
 });

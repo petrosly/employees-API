@@ -18,7 +18,7 @@ arrayOfEmployees.push({
   firstName: "Sylvie",
   lastName: "Phan",
   email: "sphan@email.com",
-  department: "Accountant",
+  department: "Accounting",
   yearsWorking: 12,
 });
 arrayOfEmployees.push({
@@ -74,7 +74,7 @@ arrayOfEmployees.push({
   firstName: "Alina",
   lastName: "Weeks",
   email: "aweeks@email.com",
-  department: "Tehnology",
+  department: "Technology",
   yearsWorking: 6,
 });
 arrayOfEmployees.push({

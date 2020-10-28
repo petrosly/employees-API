@@ -72,4 +72,47 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { findUsers, findUserById, createUser, deleteUser };
+const deleteDepartment = async (req, res) => {
+  let employeesOfDepartment;
+  try {
+    employeesOfDepartment = await User.find({
+      department: req.params.department,
+    });
+  } catch (e) {
+    res
+      .status(400)
+      .send(
+        "An error occured when trying to find users with the given department: " +
+          e
+      );
+  }
+
+  if (employeesOfDepartment.length == 0) {
+    res
+      .status(400)
+      .send("No employees inside the department you try to delete");
+    return;
+  }
+
+  employeesOfDepartment.forEach(async (employee) => {
+    try {
+      await User.deleteOne(employee).exec();
+    } catch (e) {
+      res
+        .status(400)
+        .send("An error occured while deleting the department you want: " + e);
+    }
+  });
+
+  res
+    .status(200)
+    .send(`Deleted ${req.params.department} department successfully`);
+};
+
+module.exports = {
+  findUsers,
+  findUserById,
+  createUser,
+  deleteUser,
+  deleteDepartment,
+};
